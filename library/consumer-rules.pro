@@ -1,0 +1,2 @@
+-keep class com.github.xs93.avi.**{*;}
+-keep class com.github.xs93.avi.indicator.**{*;}
