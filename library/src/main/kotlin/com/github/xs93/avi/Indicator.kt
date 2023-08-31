@@ -146,6 +146,7 @@ abstract class Indicator : Drawable(), Animatable {
             mAnimators.forEach {
                 val updateListener = mUpdateListeners[it]
                 updateListener?.let { listener ->
+                    it.removeUpdateListener(listener)
                     it.addUpdateListener(listener)
                 }
                 it.start()
@@ -155,10 +156,8 @@ abstract class Indicator : Drawable(), Animatable {
 
     private fun stopAnimator() {
         mAnimators.forEach {
-            if (it.isStarted) {
-                it.removeAllUpdateListeners()
-                it.end()
-            }
+            it.removeAllUpdateListeners()
+            it.end()
         }
     }
 

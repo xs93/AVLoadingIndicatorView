@@ -169,6 +169,7 @@ class AVLoadingIndicatorView @JvmOverloads constructor(
         if (mIndicator != indicator) {
             mIndicator?.let {
                 it.callback = null
+                it.stop()
                 unscheduleDrawable(it)
             }
 
@@ -177,7 +178,14 @@ class AVLoadingIndicatorView @JvmOverloads constructor(
             indicator?.let {
                 it.callback = this
             }
-            postInvalidate()
+            if (width != 0 && height != 0) {
+                uploadDrawableBounds(width, height)
+            }
+            if (isAttachedToWindow) {
+                startAnimation()
+            } else {
+                postInvalidate()
+            }
         }
     }
 
@@ -305,14 +313,13 @@ class AVLoadingIndicatorView @JvmOverloads constructor(
     }
 
     private fun drawIndicator(canvas: Canvas) {
-        val drawable = mIndicator
-        drawable?.let {
+        mIndicator?.let {
             val saveCount = canvas.save()
             canvas.translate(paddingLeft.toFloat(), paddingTop.toFloat())
             it.draw(canvas)
             canvas.restoreToCount(saveCount)
             if (mShouldStartAnimationDrawable) {
-                drawable.start()
+                it.start()
                 mShouldStartAnimationDrawable = false
             }
         }

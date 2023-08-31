@@ -1,7 +1,10 @@
 package com.github.xs93.avi.simple
 
+import android.animation.ValueAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import com.github.xs93.avi.indicator.BallClipRotateMultipleIndicator
 import com.github.xs93.avi.simple.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +41,20 @@ class MainActivity : AppCompatActivity() {
             stopAnimation.setOnClickListener {
                 loadingView.stopAnimation()
             }
+
+            changeLoading.setOnClickListener {
+                val loading = BallClipRotateMultipleIndicator()
+                loadingView.setIndicator(loading)
+            }
         }
 
+        val rotateAnim = ValueAnimator.ofFloat(0f, 180f, 360f).apply {
+            duration = 600
+            repeatCount = -1
+            addUpdateListener {
+
+            }
+        }
+        rotateAnim.start()
     }
 }
