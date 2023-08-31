@@ -8,7 +8,7 @@ import com.github.xs93.avi.Indicator
 import kotlin.math.min
 
 /**
- * 三球循环动画指示器
+ * 三球循环动画指示器，效果查看第1行第1个
  *
  * @author XuShuai
  * @version v1.0
