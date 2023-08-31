@@ -73,7 +73,7 @@ open class BallSpinFadeLoaderIndicator : Indicator() {
     protected fun circleAt(width: Int, height: Int, radius: Float, angle: Double, pointF: PointF) {
         val x = (width / 2f + radius * cos(angle)).toFloat()
         val y = (height / 2f + radius * sin(angle)).toFloat()
-        point.set(x, y)
+        pointF.set(x, y)
     }
 
 }
