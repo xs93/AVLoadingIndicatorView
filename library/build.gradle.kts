@@ -28,6 +28,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        moduleName = "com.github.xs93.avi"
     }
 
     buildFeatures {
@@ -52,7 +53,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.xs93"
                 artifactId = "AVLoadingIndicatorView"
-                version = "1.0.0"
+                version = "1.0.1"
             }
         }
     }
