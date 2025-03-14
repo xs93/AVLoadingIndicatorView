@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.github.xs93.avi.simple"
-    compileSdk = 33
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.github.xs93.avi.simple"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -47,8 +46,10 @@ dependencies {
     api(libs.androidx.fragment.ktx)
     implementation(project(mapOf("path" to ":library")))
 
+    implementation("com.github.deakea:SelfDemo:1.0.4")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
 }

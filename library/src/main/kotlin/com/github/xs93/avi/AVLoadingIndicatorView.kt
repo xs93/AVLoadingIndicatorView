@@ -59,12 +59,18 @@ class AVLoadingIndicatorView @JvmOverloads constructor(
     }
 
     init {
-        val ta = context.obtainStyledAttributes(attrs, R.styleable.AVLoadingIndicatorView, defStyleAttr, defStyleRes)
+        val ta = context.obtainStyledAttributes(
+            attrs,
+            R.styleable.AVLoadingIndicatorView,
+            defStyleAttr,
+            defStyleRes
+        )
         mMinWidth = ta.getDimensionPixelSize(R.styleable.AVLoadingIndicatorView_minWidth, 24)
         mMaxWidth = ta.getDimensionPixelSize(R.styleable.AVLoadingIndicatorView_maxWidth, 48)
         mMinHeight = ta.getDimensionPixelSize(R.styleable.AVLoadingIndicatorView_minHeight, 24)
         mMaxHeight = ta.getDimensionPixelSize(R.styleable.AVLoadingIndicatorView_maxHeight, 48)
-        mIndicatorColor = ta.getColor(R.styleable.AVLoadingIndicatorView_indicatorColor, Color.WHITE)
+        mIndicatorColor =
+            ta.getColor(R.styleable.AVLoadingIndicatorView_indicatorColor, Color.WHITE)
         val indicatorName = ta.getString(R.styleable.AVLoadingIndicatorView_indicatorName)
         setIndicator(indicatorName)
         if (mIndicator == null) {
@@ -134,10 +140,12 @@ class AVLoadingIndicatorView @JvmOverloads constructor(
 
     override fun invalidateDrawable(drawable: Drawable) {
         if (verifyDrawable(drawable)) {
-            val dirty = drawable.bounds
-            val scrollX = scrollX + paddingLeft
-            val scrollY = scrollY + paddingTop
-            invalidate(dirty.left + scrollX, dirty.top + scrollY, dirty.right + scrollX, dirty.bottom + scrollY)
+//            val dirty = drawable.bounds
+//            val scrollX = scrollX + paddingLeft
+//            val scrollY = scrollY + paddingTop
+//            invalidate(dirty.left + scrollX, dirty.top + scrollY, dirty.right + scrollX, dirty.bottom + scrollY)
+            //直接刷新，不再计算刷新区域，因为系统会自己计算刷新区域
+            invalidate()
         } else {
             super.invalidateDrawable(drawable)
         }
@@ -204,7 +212,7 @@ class AVLoadingIndicatorView @JvmOverloads constructor(
 
         try {
             val drawableClass = Class.forName(drawableClassName.toString())
-            val indicator = drawableClass.newInstance() as Indicator
+            val indicator = drawableClass.getDeclaredConstructor().newInstance() as Indicator
             setIndicator(indicator)
         } catch (e: ClassNotFoundException) {
             Log.e(TAG, "Didn't find your class , check the name again !")

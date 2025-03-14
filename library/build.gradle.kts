@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -7,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.github.xs93.avi"
-    compileSdk = 33
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -19,13 +18,17 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
         moduleName = "com.github.xs93.avi"
@@ -53,7 +56,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.xs93"
                 artifactId = "AVLoadingIndicatorView"
-                version = "1.0.1"
+                version = "1.0.2"
             }
         }
     }
